@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>카카오페이 홈</title>
+    <meta name="viewport" content="width=400, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <!-- 상단 헤더 -->
+    <div class="header">
+        <div class="header-row">
+            <span style="font-weight: bold; font-size: 21px;">&#128172;pay</span>
+            <div class="header-icons">
+                <button class="header-btn"><span class="header-icon">&#128269;</span></button>
+                <button class="header-btn"><span class="header-icon">&#128276;</span></button>
+                <button class="header-btn"><span class="header-icon">&#9776;</span></button>
+            </div>
+        </div>
+    </div>
+    <!-- 페이머니 -->
+    <div class="money-box">
+        <div class="money-row">
+            <span class="money-label">페이머니</span>
+            <span class="money-dot">•</span>
+            <span style="color:#b2b2b2;">pay</span>
+            <span class="money-dot">•</span>
+            <span style="font-size:13px; color:#bbb;">증권 <span title="i">ⓘ</span></span>
+        </div>
+        <div class="money-balance-row">
+            <span id="balance" class="money-amount">0원</span>
+            <span class="money-arrow">&#8250;</span>
+        </div>
+        <div style="display: flex; gap:10px;">
+            <button class="interest-btn">2원 이자 받기</button>
+            <div style="flex:1;"></div>
+            <button id="chargeBtn" class="money-action">충전</button>
+            <button id="sendBtn" class="money-action yellow">송금</button>
+        </div>
+    </div>
+
+    <!-- 충전 모달 -->
+    <div id="modal"
+        style="display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.23); z-index:100; align-items:center; justify-content:center;">
+        <div
+            style="background:#fff; max-width:320px; margin:auto; padding:23px 16px 18px 16px; border-radius:15px; box-shadow:0 2px 12px #bbb; position:relative;">
+            <span style="font-size:1.2em;font-weight:bold;">💳 얼마나 충전할까요?</span>
+            <button onclick="closeModal()"
+                style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:1.3em;cursor:pointer;">✖</button>
+            <div style="margin:18px 0 8px 0;">
+                <button class="money-action quick-charge" data-amount="1000000"
+                    style="width:100%;margin:3px 0;padding:10px;">100만원</button>
+                <button class="money-action quick-charge" data-amount="500000"
+                    style="width:100%;margin:3px 0;padding:10px;">50만원</button>
+                <button class="money-action quick-charge" data-amount="300000"
+                    style="width:100%;margin:3px 0;padding:10px;">30만원</button>
+                <button class="money-action quick-charge" data-amount="200000"
+                    style="width:100%;margin:3px 0;padding:10px;">20만원</button>
+                <button class="money-action quick-charge" data-amount="100000"
+                    style="width:100%;margin:3px 0;padding:10px;">10만원</button>
+                <button class="money-action" id="customCharge"
+                    style="width:100%;margin:10px 0 0 0;padding:10px;background:#e6f2ff;border-radius:7px;font-weight:bold;">직접
+                    입력하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 송금 모달 -->
+    <div id="sendModal" class="send-modal-bg">
+        <div class="send-modal-card">
+            <div class="send-modal-title">
+                🏦 <span>어디로 보낼까요?</span>
+            </div>
+            <button onclick="closeSendModal()" class="send-modal-close">✖</button>
+            <div class="send-modal-label">최근 보낸 계좌</div>
+            <div class="send-modal-account">
+                <b>홍길동동</b><br>
+                카카오뱅크 3333-1234-1234
+            </div>
+            <button id="accountInputBtn" class="send-modal-input-btn">계좌번호 입력</button>
+        </div>
+    </div>
+
+
+    <!-- 배너/공지 -->
+    <div class="banner-box">
+        <div>
+            <div class="banner-title">유심 없이 바로 개통하는 법</div>
+            <button class="banner-link-btn">확인하기</button>
+        </div>
+        <div class="banner-img">&#128241;</div>
+    </div>
+    <!-- 주요 서비스 그리드 -->
+    <div class="service-grid">
+        <button class="service-btn">
+            <div class="service-icon">&#128179;</div>
+            결제
+        </button>
+        <button class="service-btn">
+            <div class="service-icon" style="background:#ffe812;color:#222;">&#128176;<span
+                    class="service-badge">pay</span></div>
+            손해보험
+        </button>
+        <button class="service-btn">
+            <div class="service-icon">&#128179;</div>
+            카드만들기
+        </button>
+        <button class="service-btn">
+            <div class="service-icon">&#128181;</div>
+            대출비교
+        </button>
+        <button class="service-btn">
+            <div class="service-icon">&#128200;</div>
+            신용관리
+        </button>
+        <button class="service-btn">
+            <div class="service-icon">&#128138;</div>
+            보험진단
+        </button>
+        <button class="service-btn">
+            <div class="service-icon">&#128241;</div>
+            통신비할인
+        </button>
+        <button class="service-btn">
+            <div class="service-icon">&#8250;</div>
+            더보기
+        </button>
+    </div>
+    <!-- 광고/홍보 박스 -->
+    <div class="ad-box">
+        <div class="ad-left">
+            <span class="ad-title">AIA 건강+암보험(갱신형)<br>암 보험료 얼마일까?</span>
+            <span class="ad-desc">생명보험협회 심의필 제 2025-01614호<br>(2025-03-18~2026-03-17)</span>
+        </div>
+        <span class="ad-brand">AIA생명</span>
+    </div>
+    <!-- 통합내역 -->
+    <div class="history-section">
+        <div class="history-title">통합내역</div>
+        <div class="history-card">
+            <div class="history-avatar">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="프로필"
+                    style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div class="history-info">
+                <span class="history-name">홍길동</span>
+                <span class="history-date">05.16. · 3시간 전</span>
+            </div>
+            <div class="history-right">
+                <span class="history-amount">+100,000원</span><br>
+                <span class="history-type">송금</span>
+            </div>
+        </div>
+        <!-- 추가 내역도 이런 식으로 복붙 가능 -->
+    </div>
+    <!-- 하단 네비게이션 -->
+    <div class="bottom-nav">
+        <button class="nav-btn selected" id="nav-home">
+            <span class="nav-icon">&#8962;</span>
+            홈
+        </button>
+        <button class="nav-btn" id="nav-benefit">
+            <span class="nav-icon">&#127873;<span class="nav-badge">•</span></span>
+            혜택
+        </button>
+        <button class="nav-btn" id="nav-pay">
+            <span class="nav-icon">&#128179;</span>
+            결제
+        </button>
+        <button class="nav-btn" id="nav-money">
+            <span class="nav-icon">&#128176;</span>
+            자산
+        </button>
+        <button class="nav-btn" id="nav-paper">
+            <span class="nav-icon">&#128200;</span>
+            증권
+        </button>
+    </div>
+    <!-- 오른쪽 아래 음성버튼 -->
+    <button class="voice-btn" id="voice-btn" title="음성 질문">
+        <span class="voice-icon">&#127908;</span>
+    </button>
+    <script src="home.js"></script>
+</body>
+
+</html>
